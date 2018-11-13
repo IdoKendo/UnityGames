@@ -177,6 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 300
+  m_damageSfx: {fileID: 8300000, guid: e84c1afea3695a24a9cabb22b0782c91, type: 3}
+  m_damageVolume: 0.9
 --- !u!114 &114249843738969046
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -90,7 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d151daca59e9b46a6dcbe5c19dd336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 150
+  m_damage: 200
+  m_damageSfx: {fileID: 8300000, guid: e84c1afea3695a24a9cabb22b0782c91, type: 3}
+  m_damageVolume: 0.9
 --- !u!114 &114206165531888876
 MonoBehaviour:
   m_ObjectHideFlags: 1

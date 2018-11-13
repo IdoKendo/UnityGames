@@ -24,18 +24,33 @@ public class Player : MonoBehaviour
     private float m_maxX;
     private float m_minY;
     private float m_maxY;
+    private float m_actualSpeed;
 
     public int Health { get { return m_health; } }
 
     private void Start()
     {
         BoundariesSetup();
+        m_actualSpeed = m_moveSpeed;
     }
 
     private void Update()
     {
+        DetermineSpeed();
         Move();
         Fire();
+    }
+
+    private void DetermineSpeed()
+    {
+        if (Input.GetButtonDown("Fire3"))
+        {
+            m_actualSpeed = m_moveSpeed * 0.5f;
+        }
+        else if (Input.GetButtonUp("Fire3"))
+        {
+            m_actualSpeed = m_moveSpeed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D i_other)
@@ -71,8 +86,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * m_moveSpeed;
-        float deltaY = Input.GetAxis("Vertical") * Time.deltaTime * m_moveSpeed;
+        float deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * m_actualSpeed;
+        float deltaY = Input.GetAxis("Vertical") * Time.deltaTime * m_actualSpeed;
 
         transform.position = new Vector2()
         {
@@ -100,7 +115,7 @@ public class Player : MonoBehaviour
             Vector3 projectilePosition = new Vector3()
             {
                 x = transform.position.x,
-                y = transform.position.y + m_padding,
+                y = transform.position.y,
                 z = transform.position.z
             };
 
