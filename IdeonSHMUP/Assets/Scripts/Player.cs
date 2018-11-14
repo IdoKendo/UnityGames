@@ -86,8 +86,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * m_actualSpeed;
-        float deltaY = Input.GetAxis("Vertical") * Time.deltaTime * m_actualSpeed;
+        float deltaX = Input.GetAxisRaw("Horizontal") * Time.deltaTime * m_actualSpeed;
+        float deltaY = Input.GetAxisRaw("Vertical") * Time.deltaTime * m_actualSpeed;
 
         transform.position = new Vector2()
         {
