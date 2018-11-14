@@ -52,4 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_thousandPointsSfx: {fileID: 8300000, guid: a23c9bd28a98b894f8f4e3829c41234d, type: 3}
-  m_thousandPointsVolume: 0.25
+  m_thousandPointsVolume: 1

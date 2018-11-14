@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 300
-  m_damageSfx: {fileID: 8300000, guid: e84c1afea3695a24a9cabb22b0782c91, type: 3}
-  m_damageVolume: 1.25
+  m_damageSfx: {fileID: 8300000, guid: 611c27a87453d4545b1efe34e1b4da2d, type: 3}
+  m_damageVolume: 1.5
 --- !u!212 &212177982106790632
 SpriteRenderer:
   m_ObjectHideFlags: 1

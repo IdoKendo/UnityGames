@@ -60,3 +60,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4ce5af5ba49d31648ae7c34c3a8472ac, type: 2}
   m_startingWave: 0
   m_loopWaves: 1
+  m_startDelay: 1.5
