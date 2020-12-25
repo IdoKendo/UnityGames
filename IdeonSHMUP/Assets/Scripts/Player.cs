@@ -19,6 +19,13 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip m_projectileSfx;
     [SerializeField] [Range(0, 1)] private float m_projectileVolume = 0.1f;
 
+    [Header("General Settings")]
+    [SerializeField] private bool m_jankControlScheme = true;
+
+    [Header("Jank Controls Settings")]
+    private float m_nextJankFire = 0.0f;
+    private float m_delayBetweenShots = 0.3f;
+
     private Coroutine m_firingCoroutine;
     private float m_minX;
     private float m_maxX;
@@ -43,13 +50,16 @@ public class Player : MonoBehaviour
 
     private void DetermineSpeed()
     {
-        if (Input.GetButtonDown("Fire3"))
+        if (!m_jankControlScheme)
         {
-            m_actualSpeed = m_moveSpeed * 0.5f;
-        }
-        else if (Input.GetButtonUp("Fire3"))
-        {
-            m_actualSpeed = m_moveSpeed;
+            if (Input.GetButtonDown("Fire3"))
+            {
+                m_actualSpeed = m_moveSpeed * 0.5f;
+            }
+            else if (Input.GetButtonUp("Fire3"))
+            {
+                m_actualSpeed = m_moveSpeed;
+            }
         }
     }
 
@@ -86,25 +96,51 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        float deltaX = Input.GetAxisRaw("Horizontal") * Time.deltaTime * m_actualSpeed;
-        float deltaY = Input.GetAxisRaw("Vertical") * Time.deltaTime * m_actualSpeed;
-
-        transform.position = new Vector2()
+        if (m_jankControlScheme)
         {
-            x = Mathf.Clamp(transform.position.x + deltaX, m_minX, m_maxX),
-            y = Mathf.Clamp(transform.position.y + deltaY, m_minY, m_maxY)
-        };
+            var target = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+            var start = transform.position;
+            var diff = target - start;
+            transform.position = new Vector2()
+            {
+                x = Mathf.Clamp(transform.position.x + diff.x, m_minX, m_maxX),
+                y = Mathf.Clamp(transform.position.y + diff.y, m_minY, m_maxY)
+            };
+        }
+        else
+        {
+            float deltaX = Input.GetAxisRaw("Horizontal") * Time.deltaTime * m_actualSpeed;
+            float deltaY = Input.GetAxisRaw("Vertical") * Time.deltaTime * m_actualSpeed;
+
+            transform.position = new Vector2()
+            {
+                x = Mathf.Clamp(transform.position.x + deltaX, m_minX, m_maxX),
+                y = Mathf.Clamp(transform.position.y + deltaY, m_minY, m_maxY)
+            };
+        }
     }
 
     private void Fire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (m_jankControlScheme)
         {
-            m_firingCoroutine = StartCoroutine(ContinuousFire());
+            if (Time.time > m_nextJankFire)
+            {
+                m_firingCoroutine = StartCoroutine(ContinuousFire());
+                m_nextJankFire += m_delayBetweenShots;
+                StopCoroutine(m_firingCoroutine);
+            }
         }
-        else if (Input.GetButtonUp("Fire1"))
+        else
         {
-            StopCoroutine(m_firingCoroutine);
+            if (Input.GetButtonDown("Fire1"))
+            {
+                m_firingCoroutine = StartCoroutine(ContinuousFire());
+            }
+            else if (Input.GetButtonUp("Fire1"))
+            {
+                StopCoroutine(m_firingCoroutine);
+            }
         }
     }
 
