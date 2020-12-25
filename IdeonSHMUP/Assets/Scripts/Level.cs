@@ -15,7 +15,7 @@ public class Level : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Cutscene");
 
         try
         {
