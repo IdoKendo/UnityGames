@@ -8,8 +8,10 @@ public class Dialogue : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private TextMeshProUGUI m_textDisplay;
+    [SerializeField] private GameObject m_speakerDisplay;
     [SerializeField] private float m_typingSpeed = 0.02f;
     [SerializeField] private float m_lingerDuration = 3f;
+    [SerializeField] private Sprite[] m_speakers;
     [SerializeField] private string[] m_sentences;
     [SerializeField] private AudioClip m_typingSound;
     [SerializeField] private float m_typingVolume = 0.1f;
@@ -19,6 +21,7 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator Type()
     {
+        m_speakerDisplay.gameObject.GetComponent<SpriteRenderer>().sprite = m_speakers[m_index];
         foreach (char letter in m_sentences[m_index].ToCharArray())
         {
             m_textDisplay.text += letter;
