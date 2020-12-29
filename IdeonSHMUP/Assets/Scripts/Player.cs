@@ -19,12 +19,10 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip m_projectileSfx;
     [SerializeField] [Range(0, 1)] private float m_projectileVolume = 0.1f;
 
-    [Header("General Settings")]
-    [SerializeField] private bool m_jankControlScheme = true;
-
     [Header("Jank Controls Settings")]
-    private float m_nextJankFire = 0.0f;
-    private float m_delayBetweenShots = 0.3f;
+    [SerializeField] private bool m_jankControlScheme = true;
+    [SerializeField] private float m_nextJankFire = 0.0f;
+    [SerializeField] private float m_delayBetweenShots = 0.2f;
 
     private Coroutine m_firingCoroutine;
     private float m_minX;
