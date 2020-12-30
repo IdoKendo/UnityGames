@@ -31,7 +31,17 @@ public class Player : MonoBehaviour
     private float m_maxY;
     private float m_actualSpeed;
 
-    public int Health { get { return m_health; } }
+    public int Health
+    {
+        set
+        {
+            m_health = value;
+        }
+        get
+        {
+            return m_health;
+        }
+    }
 
     private void Start()
     {

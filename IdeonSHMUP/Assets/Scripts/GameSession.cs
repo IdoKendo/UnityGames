@@ -6,14 +6,21 @@ public class GameSession : MonoBehaviour
 {
     [SerializeField] private AudioClip m_thousandPointsSfx;
     [SerializeField] private float m_thousandPointsVolume = 0.25f;
+    [SerializeField] private int m_healthIncrease = 100;
 
     private int m_score = 0;
+    private Player m_player;
 
     public int Score { get { return m_score; } }
 
     private void Awake()
     {
         SetupSingleton();
+    }
+
+    private void Start()
+    {
+        m_player = FindObjectOfType<Player>();
     }
 
     private void SetupSingleton()
@@ -35,6 +42,8 @@ public class GameSession : MonoBehaviour
         if (m_score % 1000 == 0)
         {
             AudioSource.PlayClipAtPoint(m_thousandPointsSfx, Camera.main.transform.position, m_thousandPointsVolume);
+
+            m_player.Health += m_healthIncrease;
         }
     }
 

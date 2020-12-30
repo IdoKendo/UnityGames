@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     {
         m_shotCounter -= Time.deltaTime;
 
-        if (m_shotCounter <= 0)
+        if (m_shotCounter <= 0 && transform.position.y > 0)
         {
             Fire();
             ResetShotCounter();
