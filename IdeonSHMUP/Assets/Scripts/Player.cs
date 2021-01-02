@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     [Header("Jank Controls Settings")]
     [SerializeField] private bool m_jankControlScheme = true;
     [SerializeField] private float m_nextJankFire = 0.0f;
-    [SerializeField] private float m_delayBetweenShots = 0.2f;
+    [SerializeField] private float m_delayBetweenShots = 0.1f;
 
     private Coroutine m_firingCoroutine;
     private float m_minX;
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
     {
         if (m_jankControlScheme)
         {
-            if (Time.time > m_nextJankFire)
+            if (Time.timeSinceLevelLoad > m_nextJankFire)
             {
                 m_firingCoroutine = StartCoroutine(ContinuousFire());
                 m_nextJankFire += m_delayBetweenShots;
