@@ -11,11 +11,10 @@ public class ScoreDisplay : MonoBehaviour
     void Start()
     {
         m_scoreText = GetComponent<Text>();
-        m_gameSession = FindObjectOfType<GameSession>();
     }
     
     private void Update()
     {
-        m_scoreText.text = m_gameSession.Score.ToString();
+        m_scoreText.text = FindObjectOfType<GameSession>().Score.ToString();
     }
 }

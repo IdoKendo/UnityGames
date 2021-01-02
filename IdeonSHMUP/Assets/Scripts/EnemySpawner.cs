@@ -7,12 +7,28 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<WaveConfig> m_waveConfigurations;
     [SerializeField] private int m_startingWave = 0;
-    [SerializeField] private bool m_loopWaves = false;
     [SerializeField] private float m_startDelay = 1f;
+    [SerializeField] private int m_loopCount = 2;
+
+    private bool m_spawnedAllWaves = false;
 
     private void Start()
     {
         Invoke("Begin", m_startDelay);
+    }
+
+    private void Update()
+    {
+        if (m_spawnedAllWaves)
+        {
+            Enemy[] enemies = FindObjectsOfType<Enemy>();
+            if (enemies.Length == 0)
+            {
+                /* If finished spawning all waves and the last enemy spawned is dead
+                Then GameSession will move us to the next level! */
+                FindObjectOfType<GameSession>().NextCutscene();
+            }
+        }
     }
 
     private void Begin()
@@ -22,12 +38,14 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator StartSpawning()
     {
-        do
+        for (int i = 0; i < m_loopCount; i++)
         {
             yield return StartCoroutine(SpawnAllWaves());
-        } while (m_loopWaves); 
-    }
+        }
 
+        m_spawnedAllWaves = true;
+
+    }
 
     private IEnumerator SpawnAllWaves()
     {

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Dialogue : MonoBehaviour
@@ -38,7 +37,7 @@ public class Dialogue : MonoBehaviour
     {
         yield return new WaitForSeconds(m_lingerDuration);
 
-        SceneManager.LoadScene("Game");
+        FindObjectOfType<GameSession>().NextLevel();
     }
 
     private void Start()

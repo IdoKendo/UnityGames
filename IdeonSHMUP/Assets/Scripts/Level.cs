@@ -10,20 +10,17 @@ public class Level : MonoBehaviour
 
     public void LoadStartMenu()
     {
-        SceneManager.LoadScene("StartMenu");
+        FindObjectOfType<GameSession>().StartMenu();
+    }
+
+    public void TryAgain()
+    {
+        FindObjectOfType<GameSession>().ResetGame();
     }
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("Cutscene");
-
-        try
-        {
-            FindObjectOfType<GameSession>().ResetGame();
-        }
-        catch (NullReferenceException)
-        {            
-        }
+        FindObjectOfType<GameSession>().NextCutscene();
     }
 
     public void LoadGameOver()
